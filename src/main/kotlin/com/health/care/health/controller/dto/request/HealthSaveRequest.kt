@@ -2,6 +2,7 @@ package com.health.care.health.controller.dto.request
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.health.care.health.controller.dto.request.deserializer.DateTimeDeserializer
 import com.health.care.health.controller.dto.request.deserializer.EntryDeserializer
 import com.health.care.health.domain.enums.HealthInfoType
 import jakarta.validation.constraints.NotBlank
@@ -21,6 +22,7 @@ data class HealthSaveRequest(
     val data: Data,
 ) {
     data class Data(
+        val memo: String?,
         @field:NotEmpty
         var entries: List<Entry?>,
         val source: Source?,
@@ -35,9 +37,9 @@ data class HealthSaveRequest(
     )
 
     data class Period(
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
+        @JsonDeserialize(using = DateTimeDeserializer::class)
         val from: LocalDateTime,
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ")
+        @JsonDeserialize(using = DateTimeDeserializer::class)
         val to: LocalDateTime,
     )
 
@@ -56,6 +58,6 @@ data class HealthSaveRequest(
 
     data class Product(
         val name: String?,
-        val vendor: String?,
+        val vender: String?,
     )
 }

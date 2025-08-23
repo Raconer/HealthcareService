@@ -15,17 +15,17 @@ data class HealthData(
     @JoinColumn(name = "health_info_id")
     var healthInfo: HealthInfo,
     @Column
-    val periodFrom: LocalDateTime,
+    val periodFrom: LocalDateTime?,
     @Column
-    val periodTo: LocalDateTime,
+    val periodTo: LocalDateTime?,
     @Column
-    val distanceUnit: String,
+    val distanceUnit: String?,
     @Column
-    val distanceValue: BigDecimal,
+    val distanceValue: Float?,
     @Column
-    val caloriesUnit: String,
+    val caloriesUnit: String?,
     @Column
-    val caloriesValue: BigDecimal,
+    val caloriesValue: Float?,
     @Column
-    val steps: Int
+    val steps: Int?
 ) : BasicEntity()
