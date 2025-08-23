@@ -1,4 +1,4 @@
-package com.health.care.healthcareservice
+package com.health.care
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  shutdown: graceful
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    hikari:
+      auto-commit: false
+      connection-test-query: SELECT 1
+      minimum-idle: 10
+      maximum-pool-size: 10
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+        use_sql_comments: false
+        order_inserts: true
+        jdbc:
+          batch_size: 100
+    open-in-view: false
+    defer-datasource-initialization: true
+    show-sql: true
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger/index.html
+    supported-submit-methods: [get, post, put, delete]
+    tags-sorter: alpha
+    operations-sorter: method
+    groups-order: ASC
+
+logging:
+  level:
+    com.zaxxer.hikari: info
+    org.springframework.security: info
+
+common:
+  jwt:
+    secret_key: dGhpc2lzMzJiYnl0ZXNsb25nc2VjdXJla2V5IQ==
+    expire_time: 3600000 # 1시간
