@@ -30,10 +30,9 @@ class SecurityConfig(
             .formLogin { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers(
-                        "/swagger/**","/swagger-ui/**", "/v3/api-docs/**",
-                        "/user").permitAll()
+                    .requestMatchers("/swagger/**","/swagger-ui/**", "/v3/api-docs/**").permitAll()
                     .requestMatchers(HttpMethod.POST,"/sign/in", "/sign/up").permitAll()
+                    .requestMatchers("/health/**").authenticated()
                     .anyRequest().denyAll()
             }
             .httpBasic(Customizer.withDefaults())

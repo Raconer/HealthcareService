@@ -10,4 +10,8 @@ class SignRepository(
     fun save(user: User): User {
         return this.signJpaRepository.save(user)
     }
+
+    fun findByUsername(username: String): User? {
+        return  this.signJpaRepository.findByUsername(username)
+    }
 }
