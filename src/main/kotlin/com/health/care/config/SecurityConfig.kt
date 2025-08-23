@@ -33,8 +33,7 @@ class SecurityConfig(
                     .requestMatchers(
                         "/swagger/**","/swagger-ui/**", "/v3/api-docs/**",
                         "/user").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/sign/in").permitAll()
-                    .requestMatchers("/admin/**").authenticated()
+                    .requestMatchers(HttpMethod.POST,"/sign/in", "/sign/up").permitAll()
                     .anyRequest().denyAll()
             }
             .httpBasic(Customizer.withDefaults())

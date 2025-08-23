@@ -3,7 +3,7 @@ package com.health.care.config.security
 import com.health.care.common.constants.GlobalConstants
 import com.health.care.common.constants.ResponseMessages
 import com.health.care.common.exception.UserNotFoundException
-import com.health.care.sign.dto.SignDTO
+import com.health.care.sign.controller.dto.SignDTO
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -18,7 +18,8 @@ class JwtRequestFilter(
 
     private val EXCLUDE_MAP: Map<String, Set<HttpMethod>> = mapOf(
         "/api/user" to setOf(HttpMethod.POST),
-        "/api/sign/in" to setOf(HttpMethod.POST)
+        "/api/sign/in" to setOf(HttpMethod.POST),
+        "/api/sign/up" to setOf(HttpMethod.POST)
     )
 
     private val SWAGGER_EXCLUDE_PATHS = listOf(

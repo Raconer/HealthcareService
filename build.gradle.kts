@@ -36,6 +36,9 @@ dependencies {
     implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
     kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
 
+    // SQL 로그 출력용
+    implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.1")
+
     // JWT 인증
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
@@ -43,6 +46,10 @@ dependencies {
 
     // Swagger UI 제공 (API 문서 자동 생성 및 웹 UI 제공)
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.9")
+
+    // MapStruct 매핑 라이브러리 (DTO ↔ Entity 변환 자동화)
+    implementation("org.mapstruct:mapstruct:1.5.5.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")

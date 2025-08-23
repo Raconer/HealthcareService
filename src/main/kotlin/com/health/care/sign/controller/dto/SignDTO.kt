@@ -1,4 +1,4 @@
-package com.health.care.sign.dto
+package com.health.care.sign.controller.dto
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails
 data class SignDTO (
     private var username: String,
     private var password: String? = null
-):UserDetails{
+): UserDetails {
     /**
      * 현재는 권한을 사용하지 않기 때문에 null 반환.
      * 필요한 경우 ROLE 정보를 여기서 반환해야 함.
