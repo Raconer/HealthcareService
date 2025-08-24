@@ -1,0 +1,39 @@
+### 회원가입 (Sign Up)
+POST http://localhost:8080/api/sign/up
+Content-Type: application/json
+
+{
+    "username" : "test@test.com",
+    "password" : "12345678",
+    "name" : "테스트 사용자",
+    "nickName" : "테스트 닉네임"
+}
+
+### 로그인 (Login)
+POST http://localhost:8080/api/sign/in
+Content-Type: application/json
+
+{
+  "username": "test@test.com",
+  "password": "12345678"
+}
+
+> {% client.global.set("auth_token", response.body.result.token); %}
+
+### 헬스데이터 업로드
+POST http://localhost:8080/api/health
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+#< ./src/test/resources/json/INPUT_DATA1.json
+< ./src/test/resources/json/INPUT_DATA2.json
+#< ./src/test/resources/json/INPUT_DATA3.json
+#< ./src/test/resources/json/INPUT_DATA4.json
+
+### 헬스데이터 조회 (일별)
+GET http://localhost:8080/api/health?from=2024-11-01&to=2024-12-31&page=1&searchType=DAY
+Authorization: Bearer {{auth_token}}
+
+### 헬스데이터 조회 (월별) Default
+GET http://localhost:8080/api/health?from=2024-11-01&to=2024-12-31&page=1&searchType=MONTH
+Authorization: Bearer {{auth_token}}
