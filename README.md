@@ -8,6 +8,13 @@
 # 로컬실행시 DB 생성 필요
 # CREATE DATABASE health_mng CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+# 원하는 데이터 조회시 각 INTPUT_DATA1~4.json 에 맞는 데이터 로그인후 조회 API 실행
+#  - user1@yahoo.com 
+#  - user2@yahoo.com
+#  - user3@yahoo.com 
+#  - user4@yahoo.com
+#  - 테스트 계정 비밀번호: 1q2w3e4r!@#$
+
 # 실행
 ./startup.sh
 ````
@@ -125,7 +132,12 @@ root
 ## data.sql 정보
 - 서버 실행시 데이터 input
 - PATH : ./src/main/resources/data.sql
+  - user2@yahoo.com
+  - user1@yahoo.com 
+  - user3@yahoo.com 
+  - user4@yahoo.com
   - 테스트 계정 비밀번호: 1q2w3e4r!@#$
+     
 
 ### ERD
 ![ERD](./img/health.png)
