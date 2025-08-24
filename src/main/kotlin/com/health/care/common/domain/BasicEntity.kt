@@ -3,6 +3,7 @@ package com.health.care.common.domain
 import jakarta.persistence.Column
 import jakarta.persistence.EntityListeners
 import jakarta.persistence.MappedSuperclass
+import org.hibernate.annotations.Comment
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -17,12 +18,14 @@ abstract class BasicEntity {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @CreatedDate
     @Column(nullable = false, updatable = false, name = "created_at")
+    @Comment("생성 일시")
     private var createdAt: LocalDateTime? = null // 생성일시
 
     // 수정일시: insert 및 update 시 자동 갱신됨
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @LastModifiedDate
     @Column(name = "updated_at")
+    @Comment("수정 일시")
     private var updatedAt: LocalDateTime? = null // 수정일시
 
     // 외부 접근용 getter

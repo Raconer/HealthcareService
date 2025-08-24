@@ -5,6 +5,9 @@
 # 실행 권한 부여
 # chmod +x startup.sh
 
+# 로컬실행시 DB 생성 필요
+# CREATE DATABASE health_mng CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 # 실행
 ./startup.sh
 ````
@@ -126,6 +129,64 @@ root
 
 ### ERD
 ![ERD](./img/health.png)
+
+### ParseErrorLog 테이블 컬럼 설명
+
+| 컬럼명           | 타입          | 널 허용 | 설명                                                   |
+|------------------|---------------|---------|--------------------------------------------------------|
+| id               | BIGINT (PK)   | N       | 고유 식별자 (자동 증가)                                |
+| user_id          | BIGINT (FK)   | N       | 오류 발생 사용자 ID (User 엔티티 참조)                 |
+| path             | VARCHAR(255)  | N       | 오류 발생 위치 (예: JSON 경로, 필드 경로)              |
+| field            | VARCHAR(255)  | N       | 오류 필드명                                            |
+| rejected_value   | TEXT          | Y       | 거부된 값 (유효성 검사 실패 값, TEXT 타입)             |
+| message          | VARCHAR(500)  | N       | 오류 메시지 (예: Invalid format, 필수 값 누락 등)      |
+| occurred_at      | DATETIME      | N       | 오류 발생 시각 (기본값: 현재 시간)                     |
+
+
+### HealthInfo 테이블 컬럼 설명
+
+| 컬럼명         | 타입          | 널 허용 | 설명                                               |
+|----------------|---------------|---------|----------------------------------------------------|
+| id             | BIGINT (PK)   | N       | 고유 식별자 (자동 증가)                            |
+| record_key     | VARCHAR(40)   | N       | 사용자 구분 키 (recordKey)                         |
+| memo           | TEXT          | Y       | 추가 메모                                          |
+| last_update    | DATETIME      | Y       | 마지막 업데이트 시각                                |
+| type           | VARCHAR(10)   | N       | 헬스 정보 타입 (예: 걸음수, 심박수 등)             |
+| product_name   | VARCHAR(64)   | Y       | 데이터를 수집한 제품 이름                           |
+| product_vendor | VARCHAR(64)   | Y       | 데이터를 수집한 벤더/제조사                        |
+| source_type    | VARCHAR(64)   | Y       | 데이터 소스 타입                                    |
+| source_mode    | INT           | Y       | 데이터 소스 모드                                    |
+| source_name    | VARCHAR(64)   | Y       | 데이터 소스 이름                                    |
+| healthDataList | - (1:N 매핑)  | Y       | 연결된 HealthData 목록 (HealthData 엔티티와 1:N 관계) |
+
+### HealthData 테이블 컬럼 설명
+
+| 컬럼명         | 타입          | 널 허용 | 설명                                |
+|----------------|---------------|---------|-------------------------------------|
+| id             | BIGINT (PK)   | N       | 고유 식별자 (자동 증가)             |
+| health_info_id | BIGINT (FK)   | N       | 연결된 HealthInfo ID (FK)           |
+| period_from    | DATETIME      | Y       | 데이터 기록 시작 시각               |
+| period_to      | DATETIME      | Y       | 데이터 기록 종료 시각               |
+| distance_unit  | VARCHAR(255)  | Y       | 이동 거리 단위 (예: km, m)          |
+| distance_value | FLOAT         | Y       | 이동 거리 값                        |
+| calories_unit  | VARCHAR(255)  | Y       | 칼로리 단위 (예: kcal)              |
+| calories_value | FLOAT         | Y       | 칼로리 소모 값                      |
+| steps          | INT           | Y       | 걸음 수                             |
+| year_from      | INT           | Y       | 기록 시작 연도                      |
+| month_from     | INT           | Y       | 기록 시작 월                        |
+| day_from       | INT           | Y       | 기록 시작 일                        |
+
+### User 테이블 컬럼 설명
+
+### User
+| 컬럼명   | 타입         | 널 허용 | 설명                                       |
+|----------|--------------|---------|--------------------------------------------|
+| id       | VARCHAR(36)  | N       | 고유 식별자(UUID, 저장 시 자동 생성)       |
+| username | VARCHAR      | N (UQ)  | 로그인 아이디(중복 불가)                   |
+| password | VARCHAR      | N       | 비밀번호(암호화 저장)                      |
+| name     | VARCHAR      | N       | 사용자 이름                                 |
+| nickName | VARCHAR      | N       | 사용자 닉네임                               |
+
 
 ## 테스트 방법
 - test.http 파일 실행하여 API 요청 테스트 가능

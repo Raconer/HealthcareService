@@ -32,7 +32,7 @@ spring:
           batch_size: 100
     open-in-view: false
     defer-datasource-initialization: true
-    show-sql: true
+    show-sql: false
   sql:
     init:
       mode: always
