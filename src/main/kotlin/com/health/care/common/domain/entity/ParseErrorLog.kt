@@ -1,6 +1,5 @@
 package com.health.care.common.domain.entity
 
-import com.health.care.health.domain.HealthInfo
 import com.health.care.sign.domain.User
 import jakarta.persistence.*
 import java.time.LocalDateTime

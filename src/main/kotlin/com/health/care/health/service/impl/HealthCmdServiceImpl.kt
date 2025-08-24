@@ -7,6 +7,7 @@ import com.health.care.health.repository.data.HealthDataRepository
 import com.health.care.health.repository.info.HealthInfoRepository
 import com.health.care.health.service.HealthCmdService
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class HealthCmdServiceImpl(
@@ -14,6 +15,8 @@ class HealthCmdServiceImpl(
     private val healthDataRepository: HealthDataRepository,
     private val healthMapper: HealthMapper
 ) : HealthCmdService {
+
+    @Transactional
     override fun save(healthSaveRequest: HealthSaveRequest) {
 
         val healthInfo = this.healthMapper.toEntity(healthSaveRequest)
@@ -21,6 +24,7 @@ class HealthCmdServiceImpl(
         this.healthInfoRepository.save(healthInfo)
 
         val healthDataList = healthSaveRequest.data.entries.map {
+            val from = it?.period?.from
             HealthData(
                 healthInfo = healthInfo,
                 periodFrom = it?.period?.from,
@@ -29,10 +33,12 @@ class HealthCmdServiceImpl(
                 distanceValue = it?.distance?.value,
                 caloriesUnit = it?.calories?.unit,
                 caloriesValue = it?.calories?.value,
-                steps = it?.steps
+                steps = it?.steps,
+                yearFrom = from?.year ,
+                monthFrom = from?.monthValue,
+                dayFrom = from?.dayOfMonth,
             )
         }
-
         this.healthDataRepository.saveAll(healthDataList)
 
     }

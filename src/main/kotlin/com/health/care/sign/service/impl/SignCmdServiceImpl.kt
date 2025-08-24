@@ -7,6 +7,7 @@ import com.health.care.sign.repository.SignRepository
 import com.health.care.sign.service.SignCmdService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class SignCmdServiceImpl(
@@ -14,6 +15,7 @@ class SignCmdServiceImpl(
     private val signMapper: SignMapper,
     private val passwordEncoder: PasswordEncoder
 ) : SignCmdService {
+    @Transactional
     override fun signUp(signUpRequest: SignUpRequest): User {
         val user = this.signMapper.toEntity(signUpRequest, this.passwordEncoder)
         return this.signRepository.save(user)

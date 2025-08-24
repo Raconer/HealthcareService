@@ -3,7 +3,6 @@ package com.health.care.health.domain
 import com.health.care.common.domain.BasicEntity
 import com.health.care.health.domain.enums.HealthInfoType
 import jakarta.persistence.*
-import java.time.LocalDateTime
 import java.time.OffsetDateTime
 
 @Entity

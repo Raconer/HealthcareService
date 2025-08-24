@@ -1,9 +1,4 @@
 
-
-http://localhost:8080/api/swagger/index.html
-
-
-
 ```shell
 # 만약 실행 권한이 없다면
 chmod +x startup.sh
@@ -11,11 +6,11 @@ chmod +x startup.sh
 # 실행시 
 ./startup.sh
 ```
-### 📘 API 문서 (SWAGGER)
+### API 문서 (SWAGGER)
 - http://localhost:8080/api/swagger/index.html
 
 
-
+-- password : 1q2w3e4r!@#$
 
 ### 제출 산출물
 
