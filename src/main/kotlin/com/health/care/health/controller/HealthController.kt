@@ -28,6 +28,15 @@ class HealthController(
 
     private val log = LoggerFactory.getLogger(HealthController::class.java)
 
+    @Operation(
+        summary = "건강 목록 추가",
+        description = "건강 정보 회원 목록을 추가",
+        responses = [
+            ApiResponse(responseCode = "200", description = "조회 성공"),
+            ApiResponse(responseCode = "400", description = "잘못된 요청"),
+            ApiResponse(responseCode = "500", description = "서버 오류")
+        ]
+    )
     @PostMapping
     fun save(
         @RequestBody healthSaveRequest: HealthSaveRequest
@@ -44,7 +53,6 @@ class HealthController(
         return CommonRes.Basic(HttpStatus.OK)
     }
 
-    // 회원 조회
     @Operation(
         summary = "건강 목록 조회",
         description = "건강 정보 회원 목록을 조회합니다.",
